@@ -1,0 +1,65 @@
+A. Source code for divide by zero exception:
+
+using System;
+namespace ConsoleApplication2
+{
+class Program
+{
+static void Main(string[] args)
+{
+int a, b;
+try
+{
+Console.WriteLine("Enter the a value:");
+a = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Enter the b value:");
+b = Convert.ToInt32(Console.ReadLine());
+int c = a / b; // This may raise DivideByZeroException
+Console.WriteLine("The value after division is: {0}", c);
+}
+catch (DivideByZeroException e)
+{
+Console.WriteLine(e.Message);
+}
+finally
+{
+Console.WriteLine("End");
+}
+Console.ReadKey();
+}
+}
+}
+
+
+
+
+B. Source code for Array Index Out of Range Exception
+using System;
+namespace exception3
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ int[] arr = { 10, 20, 30, 40, 50 };
+ retry: // label for goto
+ try
+ {
+ Console.WriteLine("Array elements: 10, 20, 30, 40, 50");
+ Console.Write("Enter the index you want to access : ");
+ int index = Convert.ToInt32(Console.ReadLine());
+ Console.WriteLine("The value at given index is: {0}",arr[index]);
+ }
+ catch (IndexOutOfRangeException)
+ {
+ Console.WriteLine("Invalid index! Please enter a number between 0 and 4.");
+ goto retry; // go back and ask again
+ }
+ finally
+ {
+ Console.WriteLine("End of the Program");
+ }
+ Console.ReadKey();
+ }
+ }
+}
