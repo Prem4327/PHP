@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+namespace database
+{
+public partial class Form1 : Form
+{
+public Form1()
+{
+InitializeComponent();
+}
+// Code for select button.
+private void button1_Click(object sender, EventArgs e)
+{
+SqlConnection con= new SqlConnection ("Data 
+Source=.\\SQLEXPRESS;AttachDbFilename=e:\\first.mdf;Integrated 
+Security=True;Connect Timeout=30;User Instance=True");
+string s="select * from bank;";
+ SqlCommand cmd=new SqlCommand (s,con); 
+ SqlDataReader red;
+ con.Open();
+ red=cmd.ExecuteReader (); 
+while(red.Read ())
+ {
+ textBox1 .Text=red.GetValue (0).ToString (); 
+ textBox2 .Text=red.GetString (1);
+ textBox3 .Text=red.GetString (2);
+ textBox4 .Text=red.GetValue (3).ToString (); 
+ MessageBox.Show(" One record displayed");
+ }
+ con.Close();
+}
+private void button2_Click(object sender, EventArgs e)
+{
+SqlConnection con= new SqlConnection ("Data 
+Source=.\\SQLEXPRESS;AttachDbFilename=e:\\first.mdf;Integrated 
+Security=True;Connect Timeout=30;User Instance=True");
+string s = "insert into bank(accno, name, acctype, bal) 
+ values(@taccno,@tname,@tacctype,@tbal);"; 
+ SqlCommand cmd = new SqlCommand(s, con);
+ 
+ cmd.Parameters.AddWithValue("@taccno", Convert.ToInt32(textBox1.Text));
+ cmd.Parameters.AddWithValue("@tname", textBox2.Text); 
+ cmd.Parameters.AddWithValue("@tacctype", textBox3.Text); 
+ cmd.Parameters.AddWithValue("@tbal", Convert.ToInt32(textBox4.Text));
+ con.Open();
+ cmd.ExecuteNonQuery();
+ con.Close();
+ MessageBox.Show("Inserted"); 
+}
+private void button3_Click(object sender, EventArgs e)
+{
+SqlConnection con= new SqlConnection ("Data 
+Source=.\\SQLEXPRESS;AttachDbFilename=e:\\first.mdf;Integrated 
+Security=True;Connect Timeout=30;User Instance=True");
+string s = "update bank set name=@tname,acctype=@tacctype,bal=@tbal 
+ where accno=@taccno;";
+SqlCommand cmd = new SqlCommand(s, con);
+ 
+ cmd.Parameters.AddWithValue("@taccno", Convert.ToInt32(textBox1.Text));
+ cmd.Parameters.AddWithValue("@tname", textBox2.Text); 
+ cmd.Parameters.AddWithValue("@tacctype", textBox3.Text); 
+ cmd.Parameters.AddWithValue("@tbal", Convert.ToInt32(textBox4.Text));
+ con.Open();
+ cmd.ExecuteNonQuery();
+ con.Close();
+ MessageBox.Show(" Updated"); 
+private void button4_Click(object sender, EventArgs e)
+{
+SqlConnection con= new SqlConnection ("Data 
+Source=.\\SQLEXPRESS;AttachDbFilename=e:\\first.mdf;Integrated 
+Security=True;Connect Timeout=30;User Instance=True");
+string s = "delete from bank where accno=@taccno;"; 
+ SqlCommand cmd = new SqlCommand(s, con); 
+ 
+ cmd.Parameters.AddWithValue("@taccno", Convert.ToInt32(textBox1.Text));
+ con.Open();
+ cmd.ExecuteNonQuery(); 
+ con.Close();
+ MessageBox.Show("Deleted");
+}
+}
