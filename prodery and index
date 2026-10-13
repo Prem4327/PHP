@@ -1,0 +1,78 @@
+Code for Property
+
+Source code:
+using System;
+using 
+System.Collections.Generic; 
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication1
+{
+class Program
+{
+class first
+{
+private int a;
+public int p_a // Property for the private variable a
+{
+get
+{
+return a;
+}
+set
+{
+a = value;
+}
+}
+}
+static void Main(string[] args)
+{
+first obj = new first();
+// This will raise the set method of the property p_a
+obj.p_a = 95;
+// This will raise the get method of the property p_a
+Console.WriteLine(obj.p_a);
+Console.ReadKey();
+}
+}
+}
+
+Code for Indexer
+
+Source code:
+using System;
+using 
+System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication1
+{
+class Program
+{
+class first
+{
+private string[] b = new string[3];
+public string this[int x] // Indexer for the private string array variable b
+{
+get
+{
+return b[x];
+}
+set
+{
+b[x] = value;
+}
+}
+}
+static void Main(string[] args)
+{
+first obj = new first();
+obj[2] = "welcome";// This will raise the set method of the indexer
+Console.WriteLine(obj[2]); // This will raise the get method of the indexer
+Console.ReadKey();
+}
+}
+}
+Output:
+Result:
+The program has been executed successfully
