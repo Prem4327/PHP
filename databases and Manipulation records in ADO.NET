@@ -86,3 +86,4 @@ string s = "delete from bank where accno=@taccno;";
  MessageBox.Show("Deleted");
 }
 }
+
